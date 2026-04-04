@@ -2,8 +2,28 @@
   region = "ap-south-1"
 }
 
+resource "aws_instance" "game_server" {
+  ami           = "ami-05d2d839d4f73aafb" 
+  instance_type = "t3.small"
+  key_name      = "ansible-key"
+
+  security_groups = [aws_security_group.games]
+
+  user_data = <<-EOF
+              #!/bin/bash
+              apt update -y
+              apt install nginx -y
+              systemctl start nginx
+              systemctl enable nginx
+              EOF
+
+  tags = {
+    Name = "Game-Server"
+  }
+}
+
 resource "aws_security_group" "games" {
-  name = "brain-training-games"
+  name = "games"
 
   ingress {
     from_port   = 22
@@ -26,26 +46,6 @@ resource "aws_security_group" "games" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
-resource "aws_instance" "game_server" {
-  ami                    = "ami-05d2d839d4f73aafb"
-  instance_type          = "t3.small"
-  key_name               = "ubuntu"
-  vpc_security_group_ids = [aws_security_group.games.id]
-
-  user_data = <<-EOF
-              #!/bin/bash
-              apt update -y
-              apt install nginx -y
-              systemctl start nginx
-              systemctl enable nginx
-              EOF
-
-  tags = {
-    Name = "Game-Server"
-  }
-}
-
 output "public_ip" {
   value = aws_instance.game_server.public_ip
 }
