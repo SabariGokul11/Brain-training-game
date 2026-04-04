@@ -1,0 +1,456 @@
+ /* ================================================
+   BRAIN TRAINING GAME PACK — style.css
+   ================================================ */
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:       #0a0a0f;
+  --surface:  #12121a;
+  --surface2: #1c1c28;
+  --border:   #2a2a3f;
+  --accent:   #7c6dfa;
+  --accent2:  #fa6d9a;
+  --accent3:  #6dfabc;
+  --accent4:  #fac56d;
+  --text:     #e8e8f0;
+  --text2:    #8888a8;
+  --radius:   12px;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Syne', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- SCREEN SYSTEM ---------- */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem 3rem;
+  min-height: 100vh;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ---------- HUB ---------- */
+#hub h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+#hub h1 span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#hub .sub {
+  color: var(--text2);
+  font-size: 0.95rem;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 2.5rem;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 780px;
+}
+
+/* ---------- GAME CARDS ---------- */
+.game-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+}
+
+.game-card.mem::before {
+  background: radial-gradient(ellipse at top left, rgba(124,109,250,0.18), transparent 60%);
+}
+
+.game-card.rxn::before {
+  background: radial-gradient(ellipse at top left, rgba(250,109,154,0.18), transparent 60%);
+}
+
+.game-card.pat::before {
+  background: radial-gradient(ellipse at top left, rgba(109,250,188,0.18), transparent 60%);
+}
+
+.game-card:hover::before           { opacity: 1; }
+.game-card.mem:hover { border-color: var(--accent);  box-shadow: 0 0 24px rgba(124,109,250,0.2); }
+.game-card.rxn:hover { border-color: var(--accent2); box-shadow: 0 0 24px rgba(250,109,154,0.2); }
+.game-card.pat:hover { border-color: var(--accent3); box-shadow: 0 0 24px rgba(109,250,188,0.2); }
+
+.card-icon  { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+.card-desc  { font-size: 0.85rem; color: var(--text2); line-height: 1.5; margin-bottom: 1.2rem; }
+
+.card-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+.mem .card-badge { background: rgba(124,109,250,0.2); color: var(--accent);  }
+.rxn .card-badge { background: rgba(250,109,154,0.2); color: var(--accent2); }
+.pat .card-badge { background: rgba(109,250,188,0.2); color: var(--accent3); }
+
+/* ---------- HUB STATS ---------- */
+.stats-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 780px;
+}
+
+.stat-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.5rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text2);
+}
+
+.stat-pill span {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ---------- SHARED SCREEN ELEMENTS ---------- */
+.back-btn {
+  align-self: flex-start;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  cursor: pointer;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.back-btn:hover { border-color: var(--text2); color: var(--text); }
+
+.screen-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.screen-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text2);
+  margin-bottom: 1.5rem;
+}
+
+.accent-purple { color: var(--accent);  }
+.accent-pink   { color: var(--accent2); }
+.accent-teal   { color: var(--accent3); }
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.8rem;
+  border-radius: 99px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn:hover    { opacity: 0.9; }
+.btn:active   { transform: scale(0.96); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn.ghost {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+
+.btn.ghost:hover { border-color: var(--text); color: var(--text); }
+
+.btn-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+/* ================================================
+   MEMORY GAME
+   ================================================ */
+
+#mem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem 0;
+}
+
+.mem-card {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s;
+}
+
+.mem-card.flipped,
+.mem-card.matched {
+  transform: rotateY(180deg);
+}
+
+.mem-card-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.mem-front,
+.mem-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.mem-front {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.mem-back {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  transform: rotateY(180deg);
+}
+
+.mem-card.matched .mem-back {
+  border-color: var(--accent3);
+  background: rgba(109,250,188,0.12);
+}
+
+.mem-info {
+  display: flex;
+  gap: 1.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text2);
+  margin-bottom: 0.5rem;
+}
+
+.mem-info span {
+  color: var(--text);
+  font-weight: 700;
+}
+
+#mem-msg {
+  font-size: 1rem;
+  color: var(--text2);
+  min-height: 1.4em;
+  font-family: 'DM Mono', monospace;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* ================================================
+   REACTION GAME
+   ================================================ */
+
+#rxn-arena {
+  width: 100%;
+  max-width: 420px;
+  height: 260px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.05s;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  user-select: none;
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+}
+
+#rxn-arena.wait   { background: var(--surface2); color: var(--text2); }
+#rxn-arena.ready  { background: rgba(250,109,154,0.25); border-color: var(--accent2); color: var(--accent2); }
+#rxn-arena.go     { background: rgba(109,250,188,0.30); border-color: var(--accent3); color: var(--accent3); font-size: 2rem; }
+#rxn-arena.result { background: rgba(124,109,250,0.20); border-color: var(--accent);  color: var(--accent); }
+#rxn-arena:active { transform: scale(0.97); }
+
+.rxn-history {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 420px;
+}
+
+.rxn-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 99px;
+  background: var(--surface2);
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+
+.rxn-chip.best {
+  border-color: var(--accent3);
+  color: var(--accent3);
+}
+
+#rxn-stats {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text2);
+  text-align: center;
+  min-height: 1.4em;
+  margin-bottom: 0.75rem;
+}
+
+/* ================================================
+   PATTERN GAME
+   ================================================ */
+
+#pat-grid {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 380px;
+  margin: 0.75rem 0;
+}
+
+.pat-cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  user-select: none;
+}
+
+.pat-cell:active          { transform: scale(0.93); }
+.pat-cell.lit             { box-shadow: 0 0 18px rgba(250,197,109,0.5); }
+.pat-cell.player-hit      { box-shadow: 0 0 18px rgba(124,109,250,0.5); }
+.pat-cell.wrong           { background: rgba(250,109,154,0.25) !important; border-color: var(--accent2) !important; }
+
+#pat-msg {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text2);
+  min-height: 1.4em;
+  text-align: center;
+  margin: 0.4rem 0;
+}
+
+#pat-level {
+  font-size: 1rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--text2);
+  margin-bottom: 0.2rem;
+}
+
+#pat-level span {
+  color: var(--accent4);
+  font-weight: 700;
+}
+
+.pat-prog {
+  width: 100%;
+  max-width: 380px;
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 99px;
+  margin: 0.5rem 0 1rem;
+}
+
+.pat-prog-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent4), var(--accent));
+  transition: width 0.4s;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  #mem-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+
+  .mem-front,
+  .mem-back {
+    font-size: 1.2rem;
+  }
+
+  #rxn-arena {
+    height: 200px;
+  }
+}

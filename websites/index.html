@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brain Training Game Pack</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HUB SCREEN -->
+  <div id="hub" class="screen active">
+    <h1><span>Brain</span> Training</h1>
+    <p class="sub">// three games · train your mind</p>
+    <div class="game-grid">
+      <div class="game-card mem" id="card-mem">
+        <span class="card-icon">🧠</span>
+        <div class="card-title">Memory Test</div>
+        <div class="card-desc">Flip cards and match emoji pairs. Beat the clock before your focus fades.</div>
+        <span class="card-badge">Match Pairs</span>
+      </div>
+      <div class="game-card rxn" id="card-rxn">
+        <span class="card-icon">⚡</span>
+        <div class="card-title">Reaction Test</div>
+        <div class="card-desc">Wait for green, then tap as fast as you can. Every millisecond counts.</div>
+        <span class="card-badge">5 Rounds</span>
+      </div>
+      <div class="game-card pat" id="card-pat">
+        <span class="card-icon">🔷</span>
+        <div class="card-title">Pattern Recognition</div>
+        <div class="card-desc">Watch the flashing sequence and repeat it back. Levels get harder.</div>
+        <span class="card-badge">Sequence Memory</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill">Memory best: <span id="hs-mem">—</span></div>
+      <div class="stat-pill">Reaction best: <span id="hs-rxn">—</span></div>
+      <div class="stat-pill">Pattern best: <span id="hs-pat">—</span></div>
+    </div>
+  </div>
+
+  <!-- MEMORY SCREEN -->
+  <div id="mem" class="screen">
+    <button class="back-btn" id="back-mem">← Hub</button>
+    <div class="screen-title accent-purple">Memory Test</div>
+    <div class="screen-sub">Find all matching pairs</div>
+    <div class="mem-info">
+      Moves: <span id="mem-moves">0</span>&nbsp;&nbsp;
+      Time: <span id="mem-time">0s</span>&nbsp;&nbsp;
+      Pairs: <span id="mem-pairs">0/8</span>
+    </div>
+    <div id="mem-grid"></div>
+    <div id="mem-msg">Find the matching pairs!</div>
+    <div class="btn-row">
+      <button class="btn ghost" id="mem-restart">Restart</button>
+    </div>
+  </div>
+
+  <!-- REACTION SCREEN -->
+  <div id="rxn" class="screen">
+    <button class="back-btn" id="back-rxn">← Hub</button>
+    <div class="screen-title accent-pink">Reaction Test</div>
+    <div class="screen-sub">Tap when it turns green</div>
+    <div id="rxn-arena" class="wait">Tap to start</div>
+    <div id="rxn-stats"></div>
+    <div class="rxn-history" id="rxn-history"></div>
+    <div class="btn-row" style="margin-top:1rem">
+      <button class="btn ghost" id="rxn-restart">Restart</button>
+    </div>
+  </div>
+
+  <!-- PATTERN SCREEN -->
+  <div id="pat" class="screen">
+    <button class="back-btn" id="back-pat">← Hub</button>
+    <div class="screen-title accent-teal">Pattern Recognition</div>
+    <div class="screen-sub">Watch · Remember · Repeat</div>
+    <div id="pat-level">Level <span id="pat-lvl-num">1</span></div>
+    <div class="pat-prog">
+      <div class="pat-prog-fill" id="pat-prog-fill" style="width:0%"></div>
+    </div>
+    <div id="pat-grid"></div>
+    <div id="pat-msg">Press Start to begin</div>
+    <div class="btn-row">
+      <button class="btn" id="pat-start-btn">Start</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
