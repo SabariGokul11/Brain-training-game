@@ -1,15 +1,15 @@
-pipeline {
+ pipeline {
     agent any
 
     environment {
-        KEY_PATH = "/var/lib/jenkins/ansible-key.pem"
+        KEY_PATH = "/var/lib/jenkins/Ubuntu.pem"
     }
 
     stages {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/SabariGokul11/Brain-training-game.git'
+                git branch: 'main', url: ''
             }
         }
 
